@@ -1,11 +1,18 @@
 package com.fa.DPA.model;
 
-import javax.persistence.Entity;
-import javax.persistence.Id;
+import lombok.Data;
+import org.hibernate.annotations.Generated;
+
+import javax.persistence.*;
 import java.io.Serializable;
 
-@Entity
-public class AbstracModel implements Serializable {
+@MappedSuperclass
+@Data
+public abstract class AbstracModel implements Serializable {
     @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
+
+
+
 }
