@@ -12,6 +12,7 @@ import java.time.LocalDate;
 @Entity
 @Data
 public class StaffAccount extends BaseAccount{
+    @Column(columnDefinition = "nvarchar")
     private String staff_name;
     @Column(unique = true, length = 50)
     private String email;

@@ -8,7 +8,7 @@ import javax.persistence.MappedSuperclass;
 @MappedSuperclass
 @Data
 public class BaseAccount extends AbstractModel {
-    @Column(unique = true, nullable = false)
+    @Column(unique = true, columnDefinition = "nvarchar",nullable = false)
     private String username;
     @Column(nullable = false, length = 50)
     private String password;
