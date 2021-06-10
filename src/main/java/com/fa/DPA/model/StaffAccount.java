@@ -1,16 +1,17 @@
 package com.fa.DPA.model;
 
+import lombok.AllArgsConstructor;
 import lombok.Data;
+import lombok.NoArgsConstructor;
 import org.hibernate.annotations.JoinColumnOrFormula;
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.JoinColumn;
-import javax.persistence.OneToOne;
+import javax.persistence.*;
 import java.time.LocalDate;
 
 @Entity
 @Data
+@NoArgsConstructor
+@AllArgsConstructor
 public class StaffAccount extends BaseAccount{
     @Column(columnDefinition = "VARCHAR(100) CHARSET utf8")
     private String staff_name;

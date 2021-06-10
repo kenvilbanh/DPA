@@ -1,6 +1,8 @@
 package com.fa.DPA.model;
 
+import lombok.AllArgsConstructor;
 import lombok.Data;
+import lombok.NoArgsConstructor;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -10,6 +12,8 @@ import javax.persistence.OneToOne;
 
 @Entity
 @Data
+@NoArgsConstructor
+@AllArgsConstructor
 public class CustomerContact extends AbstractModel{
     @Column(columnDefinition = "VARCHAR(100) CHARSET utf8")
     private String customer_name;
