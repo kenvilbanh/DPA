@@ -9,7 +9,7 @@ import java.util.List;
 @Entity
 @Table(name = "category")
 @Data
-public class Category extends AbstracModel{
+public class Category extends AbstractModel {
 
     @Column
     private String name;

@@ -12,7 +12,7 @@ import java.util.List;
 @Entity
 @Table(name = "type")
 @Data
-public class Type extends AbstracModel{
+public class Type extends AbstractModel {
     @Column
     private String type_name;
 
