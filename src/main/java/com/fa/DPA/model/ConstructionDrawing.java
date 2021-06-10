@@ -14,13 +14,13 @@ public class ConstructionDrawing extends AbstracModel {
     private String name;
     @Column
     private String code;
-    @Column(name="numberfloor")
+    @Column
     private int numberFloor;
-    @Column(name = "areasize")
+    @Column
     private float areaSize;
     @Column
     private String description;
-    @Column(name = "imgsource")
+    @Column
     private String imgSource;
     @Column
     private float price;
@@ -31,6 +31,11 @@ public class ConstructionDrawing extends AbstracModel {
             mappedBy = "constructionDrawing"
     )
     private List<Discount> discounts = new ArrayList<>();
+
+    @ManyToMany(
+            mappedBy = "constructionDrawings"
+    )
+    private List<Order> orders = new ArrayList<>();
 
     @ManyToOne
     @JoinColumn(name ="subCategory")
