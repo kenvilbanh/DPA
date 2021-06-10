@@ -7,8 +7,9 @@ import javax.persistence.*;
 import java.io.Serializable;
 
 
-@Data
+
 @MappedSuperclass
+@Data
 public class AbstractModel implements Serializable {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)

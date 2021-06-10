@@ -12,7 +12,7 @@ import java.time.LocalDate;
 @Entity
 @Data
 public class StaffAccount extends BaseAccount{
-    @Column(columnDefinition = "nvarchar")
+    @Column(columnDefinition = "VARCHAR(100) CHARSET utf8")
     private String staff_name;
     @Column(unique = true, length = 50)
     private String email;
