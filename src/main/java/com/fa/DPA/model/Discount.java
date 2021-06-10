@@ -13,7 +13,7 @@ import java.util.Date;
 @Data
 @Table(name = "discount")
 @EntityListeners({AuditingEntityListener.class})
-public class Discount extends AbstracModel{
+public class Discount extends AbstractModel {
     @Column
     private String name;
     @Column

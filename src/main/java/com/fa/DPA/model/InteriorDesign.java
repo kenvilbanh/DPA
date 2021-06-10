@@ -1,8 +1,6 @@
 package com.fa.DPA.model;
 
 import lombok.Data;
-import lombok.Getter;
-import lombok.Setter;
 import org.springframework.data.annotation.CreatedBy;
 import org.springframework.data.annotation.CreatedDate;
 import org.springframework.data.jpa.domain.support.AuditingEntityListener;
@@ -16,7 +14,7 @@ import java.util.List;
 @Data
 @Table(name="interior_design")
 @EntityListeners({AuditingEntityListener.class})
-public class InteriorDesign extends AbstracModel {
+public class InteriorDesign extends AbstractModel {
     @Column(name = "title")
     private String title;
     @Column(name = "description")

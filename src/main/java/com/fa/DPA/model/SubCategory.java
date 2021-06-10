@@ -10,7 +10,7 @@ import java.util.List;
 @Entity
 @Table(name = "subcategory")
 @Data
-public class SubCategory extends AbstracModel{
+public class SubCategory extends AbstractModel {
 
     @Column
     private String name;

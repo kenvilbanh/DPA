@@ -9,7 +9,7 @@ import java.util.List;
 @Entity
 @Table(name = "orders")
 @Data
-public class Order extends AbstracModel{
+public class Order extends AbstractModel {
 
 
     //private CustomerAccount owner;

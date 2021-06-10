@@ -7,7 +7,7 @@ import java.io.Serializable;
 
 @MappedSuperclass
 @Data
-public class AbstracModel implements Serializable {
+public class AbstractModel implements Serializable {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
