@@ -8,6 +8,7 @@ import org.springframework.web.cors.UrlBasedCorsConfigurationSource;
 import org.springframework.web.filter.CorsFilter;
 import java.util.Arrays;
 
+//Config for CORS Policy Error
 @Configuration
 @Order(1)
 public class CorsConfig {

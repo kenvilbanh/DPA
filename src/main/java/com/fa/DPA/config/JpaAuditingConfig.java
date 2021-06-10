@@ -10,6 +10,7 @@ import org.springframework.security.core.context.SecurityContextHolder;
 
 import java.util.Optional;
 
+//Config for create and modify (auto tracking) with jpa auditing
 @Configuration
 @EnableJpaAuditing(auditorAwareRef = "auditorProvider")
 public class JpaAuditingConfig {

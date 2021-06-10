@@ -1,6 +1,8 @@
 package com.fa.DPA.model;
 
 import lombok.Data;
+import org.springframework.data.annotation.CreatedDate;
+import org.springframework.data.jpa.domain.support.AuditingEntityListener;
 
 import javax.persistence.*;
 import java.sql.Date;
@@ -8,6 +10,7 @@ import java.util.List;
 
 @Entity
 @Table(name = "orders")
+@EntityListeners({AuditingEntityListener.class})
 @Data
 public class Order extends AbstractModel {
 
@@ -17,6 +20,10 @@ public class Order extends AbstractModel {
     @ManyToMany
     @JoinTable(name ="cd_order", joinColumns = @JoinColumn(name = "order_id"), inverseJoinColumns = @JoinColumn(name = "cd_id"))
     private List<ConstructionDrawing> constructionDrawings;
+
+    @ManyToOne
+    @JoinColumn(name = "status_id")
+    private Status status;
 
     //private StaffAccount staffAccount;
 
@@ -31,6 +38,7 @@ public class Order extends AbstractModel {
 //    private Status status;
 
     @Column
+    @CreatedDate
     private Date createdDate;
 
     @Column
