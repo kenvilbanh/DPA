@@ -4,10 +4,7 @@ import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.JoinColumn;
-import javax.persistence.OneToOne;
+import javax.persistence.*;
 
 
 @Entity
@@ -25,7 +22,7 @@ public class CustomerContact extends AbstractModel{
     private String wanted_style;
     @Column(columnDefinition = "VARCHAR(100) CHARSET utf8")
     private String address;
-    @OneToOne
+    @ManyToOne
     @JoinColumn(name = "status_id")
     private Status status;
 }

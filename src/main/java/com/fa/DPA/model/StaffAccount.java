@@ -21,10 +21,10 @@ public class StaffAccount extends BaseAccount{
     private String phone;
     private LocalDate create_date;
     private LocalDate end_date;
-    @OneToOne
+    @ManyToOne
     @JoinColumn(name = "role_id")
     private Role role;
-    @OneToOne
+    @ManyToOne
     @JoinColumn(name = "account_status_id")
     private Account_Status account_status;
 }
