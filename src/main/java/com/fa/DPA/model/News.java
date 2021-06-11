@@ -1,0 +1,40 @@
+package com.fa.DPA.model;
+
+
+import lombok.AllArgsConstructor;
+import lombok.Data;
+import lombok.NoArgsConstructor;
+import org.springframework.data.annotation.CreatedDate;
+
+import javax.persistence.*;
+import java.sql.Date;
+
+@Entity
+@Table(name = "News")
+@Data
+@NoArgsConstructor
+@AllArgsConstructor
+public class News extends AbstractModel{
+    @Column(columnDefinition = "VARCHAR(255) CHARSET utf8",nullable = false)
+    private String title;
+
+    @Column(columnDefinition = "VARCHAR(255) CHARSET utf8",nullable = false)
+    private String description;
+
+    @Column(columnDefinition = "TEXT CHARSET utf8",nullable = false)
+    private String content;
+
+    @Column(name = "created_date",nullable = false)
+    @CreatedDate
+    private Date createdDate;
+
+    @ManyToOne
+    @JoinColumn(name = "create_by", nullable = false)
+    private AdminAccount adminAccount;
+
+    @Column(name = "end_date")
+    private Date endDate;
+
+    @Column(name = "is_Modify" )
+    private Boolean isModify;
+}
