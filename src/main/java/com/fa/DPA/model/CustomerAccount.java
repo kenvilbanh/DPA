@@ -19,7 +19,7 @@ import javax.persistence.Table;
 public class CustomerAccount extends BaseAccount{
 
     @Column(columnDefinition = "VARCHAR(100) CHARSET utf8")
-    private String staff_name;
+    private String customer_name;
 
     @Column(unique = true, length = 50)
     private String email;

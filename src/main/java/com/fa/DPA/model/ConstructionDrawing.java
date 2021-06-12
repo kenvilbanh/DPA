@@ -27,10 +27,9 @@ public class ConstructionDrawing extends AbstractModel {
     @Column
     private String thumbnail;
 
-    @OneToMany(
-            mappedBy = "constructionDrawing"
-    )
-    private List<Discount> discounts = new ArrayList<>();
+    @OneToOne
+    @JoinColumn(name = "discount_id", referencedColumnName = "id")
+    private Discount discount;
 
     @ManyToMany(
             mappedBy = "constructionDrawings"
