@@ -32,10 +32,13 @@ public class ConstructionDrawing extends AbstractModel {
     )
     private List<Discount> discounts = new ArrayList<>();
 
+
+
     @ManyToMany(
             mappedBy = "constructionDrawings"
     )
     private List<Order> orders = new ArrayList<>();
+
 
     @ManyToOne
     @JoinColumn(name ="subCategory")

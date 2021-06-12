@@ -15,7 +15,7 @@ import java.time.LocalDate;
 @AllArgsConstructor
 @EntityListeners({AuditingEntityListener.class})
 public class StaffAccount extends BaseAccount{
-    @Column(columnDefinition = "VARCHAR(100) CHARSET utf8")
+    @Column(columnDefinition = "VARCHAR(100) CHARSET utf8", nullable = false)
     private String staff_name;
     @Column(unique = true, length = 50)
     private String email;
