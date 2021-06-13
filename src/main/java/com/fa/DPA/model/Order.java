@@ -25,7 +25,9 @@ public class Order extends AbstractModel {
     @JoinColumn(name = "status_id")
     private Status status;
 
-    //private StaffAccount staffAccount;
+    @ManyToOne
+    @JoinColumn(name = "staff_id")
+    private StaffAccount staffAccount;
 
     @Column
     private String orderCode;
@@ -46,4 +48,7 @@ public class Order extends AbstractModel {
 
     @Column
     private Date finishedDate;
+
+    @Column
+    private String totalPrice;
 }

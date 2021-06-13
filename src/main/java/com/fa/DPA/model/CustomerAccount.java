@@ -14,10 +14,10 @@ import java.time.LocalDate;
 
 @Entity
 @Table(name = "customer_account")
-@EntityListeners({AuditingEntityListener.class})
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
+@EntityListeners({AuditingEntityListener.class})
 public class CustomerAccount extends BaseAccount{
 
     @Column(columnDefinition = "VARCHAR(100) CHARSET utf8", nullable = false)
