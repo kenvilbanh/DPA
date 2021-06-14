@@ -1,5 +1,6 @@
 package com.fa.DPA.service;
 
+import com.fa.DPA.constant.Constant;
 import com.fa.DPA.model.CustomerContact;
 import com.fa.DPA.model.Status;
 import com.fa.DPA.repos.ContactRepository;
@@ -64,7 +65,7 @@ public class ContactService {
 
         if (customerContact != null) {
             System.out.println(customerContact.toString());
-            if (customerContact.getStatus().getStatus().equals("active")) {
+            if (customerContact.getStatus().getStatus().equals(Constant.ACTIVE)) {
                 Status status = new Status();
                 status.setId((long)2);
                 customerContact.setStatus(status);
