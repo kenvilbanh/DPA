@@ -11,7 +11,7 @@ import javax.persistence.*;
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
-public class CustomerContact extends AbstractModel{
+public class CustomerContact extends AbstractModel {
     @Column(columnDefinition = "VARCHAR(100) CHARSET utf8")
     private String customer_name;
     @Column(length = 50)

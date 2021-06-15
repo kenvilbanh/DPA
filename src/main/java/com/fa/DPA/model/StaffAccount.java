@@ -8,6 +8,8 @@ import org.springframework.data.jpa.domain.support.AuditingEntityListener;
 
 import javax.persistence.*;
 import java.time.LocalDate;
+import java.util.ArrayList;
+import java.util.List;
 
 @Entity
 @Data
@@ -15,7 +17,7 @@ import java.time.LocalDate;
 @AllArgsConstructor
 @EntityListeners({AuditingEntityListener.class})
 public class StaffAccount extends BaseAccount{
-    @Column(columnDefinition = "VARCHAR(100) CHARSET utf8")
+    @Column(columnDefinition = "VARCHAR(100) CHARSET utf8", nullable = false)
     private String staff_name;
     @Column(unique = true, length = 50)
     private String email;
@@ -30,4 +32,7 @@ public class StaffAccount extends BaseAccount{
     @ManyToOne
     @JoinColumn(name = "account_status_id")
     private Account_Status account_status;
+
+    @OneToMany(mappedBy = "staffAccount")
+    private List<Order> orders = new ArrayList<>();
 }

@@ -21,6 +21,10 @@ public class JpaAuditingConfig {
 
     public static class AuditorAwareImpl implements AuditorAware<String> {
 
+        /**
+         *
+         * @return
+         */
         @Override
         public Optional<String> getCurrentAuditor() {
             Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
