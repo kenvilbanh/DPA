@@ -48,7 +48,7 @@ public class ContactController {
             response.put("totalItem", contactPaging.getTotalElements());
         }catch (Exception ex){
             System.out.println(ex);
-            return new ResponseEntity<>(null, HttpStatus.BAD_REQUEST);
+            return new ResponseEntity<>(null, HttpStatus.INTERNAL_SERVER_ERROR);
         }
 
         return new ResponseEntity<>(response, HttpStatus.OK);
@@ -59,17 +59,21 @@ public class ContactController {
      *
      * @param id
      * @return
-     * @throws URISyntaxException
      */
     @DeleteMapping("/delete/{id}")
-    public ResponseEntity<Object> deleteContact(@PathVariable("id") long id) throws URISyntaxException {
+    public ResponseEntity<Object> deleteContact(@PathVariable("id") long id) {
         try{
             contactService.softDelete(id);
         }catch (Exception ex){
-            return new ResponseEntity<>(null, HttpStatus.BAD_REQUEST);
+            return new ResponseEntity<>(null, HttpStatus.INTERNAL_SERVER_ERROR);
         }
         HttpHeaders httpHeaders = new HttpHeaders();
-        httpHeaders.setLocation(new URI("/contact"));
+        try {
+            httpHeaders.setLocation(new URI("/contact"));
+        } catch (URISyntaxException e) {
+            e.printStackTrace();
+            return new ResponseEntity<>(null, HttpStatus.BAD_REQUEST);
+        }
         return new ResponseEntity<>(httpHeaders, HttpStatus.OK);
     }
 

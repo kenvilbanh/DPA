@@ -11,14 +11,9 @@ import java.util.Optional;
 
 @Repository
 public interface CustomerAccountRepository extends BaseRepository<CustomerAccount>{
-    @Override
-    List findAll();
 
     @Override
-    List findAll(Sort sort);
-
-    @Override
-    Optional findById(Long aLong);
+    Optional<CustomerAccount> findById(Long aLong);
 
     @Override
     List<CustomerAccount> findAllById(Iterable<Long> iterable);

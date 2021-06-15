@@ -18,7 +18,6 @@ import javax.persistence.EntityNotFoundException;
 import java.util.List;
 import java.util.Optional;
 
-@Data
 @Service
 public class ContactService {
     private ContactRepository contactRepository;
@@ -53,7 +52,8 @@ public class ContactService {
      * @return
      */
     public CustomerContact findById(Long id) {
-        return contactRepository.findById(id).orElseThrow(() -> new EntityNotFoundException(String.valueOf(id)));
+        return contactRepository.findById(id)
+                .orElseThrow(() -> new EntityNotFoundException("Data with this id: " + id + " is not found"));
     }
 
     /**

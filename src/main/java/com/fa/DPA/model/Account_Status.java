@@ -13,5 +13,5 @@ import javax.persistence.Entity;
 @AllArgsConstructor
 public class Account_Status extends AbstractModel {
     @Column(unique = true, nullable = false, length = 20)
-    private String account_status;
+        private String account_status;
 }
