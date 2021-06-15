@@ -20,7 +20,7 @@ public class ModificationNews extends AbstractModel{
 
     @ManyToOne
     @JoinColumn(name = "modify_by", nullable = false)
-    private AdminAccount adminAccount;
+    private StaffAccount staffAccount;
 
     @Column(name = "modify_date")
     private Date modifyDate;

@@ -30,7 +30,7 @@ public class News extends AbstractModel{
 
     @ManyToOne
     @JoinColumn(name = "create_by", nullable = false)
-    private AdminAccount adminAccount;
+    private StaffAccount staffAccount;
 
     @Column(name = "end_date")
     private Date endDate;
