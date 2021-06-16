@@ -1,6 +1,8 @@
 package com.fa.DPA.repos;
 
 import com.fa.DPA.model.StaffAccount;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Repository;
 
@@ -9,17 +11,19 @@ import java.util.Optional;
 
 @Repository
 public interface StaffAccountRepository extends BaseRepository<StaffAccount>{
-    @Override
-    List<StaffAccount> findAll();
-
-    @Override
-    List<StaffAccount> findAll(Sort sort);
-
-    @Override
-    List<StaffAccount> findAllById(Iterable<Long> iterable);
-
+    /**
+     *
+     * @param aLong
+     * @return
+     */
     @Override
     Optional<StaffAccount> findById(Long aLong);
 
-
+    /**
+     *
+     * @param pageable
+     * @return
+     */
+    @Override
+    Page<StaffAccount> findAll(Pageable pageable);
 }
