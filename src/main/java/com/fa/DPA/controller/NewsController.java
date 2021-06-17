@@ -26,13 +26,14 @@ public class NewsController {
         this.newsService=newsService;
     }
 
-    @GetMapping("/listNews")
+    @GetMapping
     public ResponseEntity<Map<String,Object>> getNewsPage(@RequestParam(defaultValue = Constant.DEFAULT_NUM_PAGE)int page){
         Map<String, Object> response = new HashMap<>();
         List<News> newsList;
         Pageable pageable = PageRequest.of(page,Constant.DEFAULT_PAGE_SIZE);
         try {
             Page<News> newsPaging = newsService.getAllNewsPaging(pageable);
+            //return list news
             newsList = newsPaging.getContent();
             response.put("newsList",newsList);
             response.put("currentPage",newsPaging.getNumber());
@@ -53,8 +54,8 @@ public class NewsController {
             return new ResponseEntity<>(HttpStatus.NOT_FOUND);
         }
     }
-    //add new news
-    @PostMapping("/listNews")
+    //create News
+    @PostMapping
     public ResponseEntity<News> createNews(@RequestBody News news){
         try {
             News _news=newsService.saveNews(news);
@@ -81,13 +82,13 @@ public class NewsController {
         }
     }
 
-    @DeleteMapping("/{id}")
-    public ResponseEntity<News> deleteNews(@PathVariable("id") long id){
-        try {
-            newsService.deleteNews(id);
-            return new ResponseEntity<>(HttpStatus.NO_CONTENT);
-        }catch (Exception ex){
-            return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
-        }
-    }
+//    @DeleteMapping("/{id}")
+//    public ResponseEntity<News> deleteNews(@PathVariable("id") long id){
+//        try {
+//            newsService.deleteNews(id);
+//            return new ResponseEntity<>(HttpStatus.NO_CONTENT);
+//        }catch (Exception ex){
+//            return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
+//        }
+//    }
 }
