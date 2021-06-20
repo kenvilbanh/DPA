@@ -29,7 +29,7 @@ public class CustomerAccountController {
      * @return
      */
     @PostMapping("/register")
-    public ResponseEntity<CustomerAccount> register(CustomerAccount customerAccount){
+    public ResponseEntity<CustomerAccount> register(@RequestBody CustomerAccount customerAccount){
         CustomerAccount customerAccountReturn = customerAccountService.saveAccount(customerAccount);
         if(customerAccountReturn == null){
             return new ResponseEntity<>(null, HttpStatus.INTERNAL_SERVER_ERROR);
@@ -44,21 +44,42 @@ public class CustomerAccountController {
         return new ResponseEntity<>(httpHeaders, HttpStatus.OK);
     }
 
-    @GetMapping("/view/id")
+    /**
+     *
+     * @param id
+     * @return
+     */
+    @GetMapping("/view/{id}")
     public ResponseEntity<CustomerAccount> viewInfo(@PathVariable("id") long id){
         CustomerAccount customerAccountReturn = customerAccountService.findById(id);
         if(customerAccountReturn == null){
-            return new ResponseEntity<>(null, HttpStatus.INTERNAL_SERVER_ERROR);
+            return new ResponseEntity<>(null, HttpStatus.NOT_FOUND);
         }
         return new ResponseEntity<>(customerAccountReturn, HttpStatus.OK);
     }
 
-//    @PostMapping("edit/id")
-//    public ResponseEntity<CustomerAccount> editInfo(@PathVariable("id") long id){
-//        CustomerAccount customerAccountReturn = customerAccountService.findById(id);
-//        if(customerAccountReturn == null){
-//            return new ResponseEntity<>(null, HttpStatus.INTERNAL_SERVER_ERROR);
-//        }
-//        return new ResponseEntity<>(customerAccountReturn, HttpStatus.OK);
-//    }
+    /**
+     *
+     * @param customerAccount
+     * @return
+     */
+    @PostMapping("edit/save")
+    public ResponseEntity<CustomerAccount> editInfo(@RequestBody CustomerAccount customerAccount){
+        Long id = customerAccount.getId();
+        CustomerAccount customerAccountReturn = customerAccountService.saveAccount(customerAccount);
+        if(customerAccountReturn == null){
+            return new ResponseEntity<>(null, HttpStatus.INTERNAL_SERVER_ERROR);
+        }
+        try {
+            httpHeaders.setLocation(new URI("/view/" + id));
+        } catch (URISyntaxException e) {
+            e.printStackTrace();
+            return new ResponseEntity<>(null, HttpStatus.BAD_REQUEST);
+        }
+        return new ResponseEntity<>(httpHeaders, HttpStatus.OK);
+    }
+
+    
+
+
 }

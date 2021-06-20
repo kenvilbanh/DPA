@@ -28,6 +28,16 @@ public class CustomerAccountService {
 
     /**
      *
+     * @param email
+     * @return
+     */
+    public CustomerAccount findByEmail(String email){
+        return customerAccountRepository.findByEmail(email).
+                orElseThrow(() -> new EntityNotFoundException("Data with this email: " + email + " is not found"));
+    }
+
+    /**
+     *
      * @param customerAccount
      * @return
      */
@@ -40,7 +50,6 @@ public class CustomerAccountService {
         }
         return null;
     }
-
 
 
 
