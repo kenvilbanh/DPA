@@ -47,7 +47,6 @@ public class ContactService {
     }
 
     /**
-     *
      * @param id
      * @return
      */
@@ -57,21 +56,18 @@ public class ContactService {
     }
 
     /**
-     *
      * @param id
      */
-    public void softDelete(Long id) {
+    public void softDelete(Long id) throws EntityNotFoundException {
         CustomerContact customerContact = this.findById(id);
-
-        if (customerContact != null) {
-            System.out.println(customerContact.toString());
-            if (customerContact.getStatus().getStatus().equals(Constant.ACTIVE)) {
-                Status status = new Status();
-                status.setId((long)2);
-                customerContact.setStatus(status);
-                contactRepository.save(customerContact);
-            }
+        System.out.println(customerContact.toString());
+        if (customerContact.getStatus().getStatus().equals(Constant.ACTIVE)) {
+            Status status = new Status();
+            status.setId((long) 2);
+            customerContact.setStatus(status);
+            contactRepository.save(customerContact);
         }
+
     }
 
 

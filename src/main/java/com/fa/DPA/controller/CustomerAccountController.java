@@ -8,6 +8,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import javax.persistence.EntityNotFoundException;
 import java.net.URI;
 import java.net.URISyntaxException;
 
@@ -51,8 +52,11 @@ public class CustomerAccountController {
      */
     @GetMapping("/view/{id}")
     public ResponseEntity<CustomerAccount> viewInfo(@PathVariable("id") long id){
-        CustomerAccount customerAccountReturn = customerAccountService.findById(id);
-        if(customerAccountReturn == null){
+        CustomerAccount customerAccountReturn;
+        try {
+            customerAccountReturn = customerAccountService.findById(id);
+        }catch (EntityNotFoundException ex){
+            System.out.println(ex);
             return new ResponseEntity<>(null, HttpStatus.NOT_FOUND);
         }
         return new ResponseEntity<>(customerAccountReturn, HttpStatus.OK);

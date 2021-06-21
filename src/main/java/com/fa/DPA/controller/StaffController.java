@@ -90,6 +90,7 @@ public class StaffController {
         try{
             staffService.modifyRoleOrStatus(id, idRole);
         }catch(Exception ex){
+            System.out.println(ex);
             return new ResponseEntity<>(null, HttpStatus.INTERNAL_SERVER_ERROR);
         }
 
@@ -116,6 +117,7 @@ public class StaffController {
         try{
             staffService.modifyRoleOrStatus(id, null);
         }catch(Exception ex){
+            System.out.println(ex);
             return new ResponseEntity<>(null, HttpStatus.INTERNAL_SERVER_ERROR);
         }
 
