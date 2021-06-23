@@ -26,6 +26,10 @@ public class ConstructionDrawing extends AbstractModel {
     private float price;
     @Column
     private String thumbnail;
+    @Column
+    private boolean status;
+
+
 
     @OneToOne
     @JoinColumn(name = "discount_id", referencedColumnName = "id")

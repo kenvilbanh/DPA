@@ -29,6 +29,7 @@ public class StaffAccount extends BaseAccount{
     @ManyToOne
     @JoinColumn(name = "role_id")
     private Role role;
+
     @ManyToOne
     @JoinColumn(name = "account_status_id")
     private Account_Status account_status;
