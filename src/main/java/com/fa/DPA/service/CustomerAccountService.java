@@ -6,6 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import javax.persistence.EntityNotFoundException;
+import java.time.LocalDateTime;
 
 @Service
 public class CustomerAccountService {
@@ -36,6 +37,18 @@ public class CustomerAccountService {
                 orElseThrow(() -> new EntityNotFoundException("Data with this email: " + email + " is not found"));
     }
 
+
+    /**
+     *
+     * @param token
+     * @param localDateTime
+     * @return
+     */
+    public CustomerAccount findByTokenPassword(String token, LocalDateTime localDateTime){
+        return customerAccountRepository.findByResetPasswordToken(token, localDateTime)
+                .orElseThrow(() -> new EntityNotFoundException("Data with this token: " + token + " is not found or unavailable"));
+    }
+
     /**
      *
      * @param customerAccount
@@ -50,6 +63,7 @@ public class CustomerAccountService {
         }
         return null;
     }
+
 
 
 

@@ -33,6 +33,6 @@ public class StaffAccount extends BaseAccount{
     @JoinColumn(name = "account_status_id")
     private Account_Status account_status;
 
-    @OneToMany(mappedBy = "staffAccount")
-    private List<Order> orders = new ArrayList<>();
+//    @OneToMany(mappedBy = "staffAccount", fetch = FetchType.LAZY)
+//    private List<Order> orders = new ArrayList<>();
 }

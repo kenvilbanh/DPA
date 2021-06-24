@@ -19,11 +19,11 @@ public class SubCategory extends AbstractModel {
     @JoinColumn(name = "category_id", nullable = false)
     private Category category;
 
-    @ManyToMany(mappedBy = "subCategories")
-    private List<InteriorDesign> interiorDesigns = new ArrayList<>();
+//    @ManyToMany(mappedBy = "subCategories")
+//    private List<InteriorDesign> interiorDesigns = new ArrayList<>();
 
-    @OneToMany(
-            mappedBy = "subCategory"
-    )
-    private List<ConstructionDrawing> constructionDrawings = new ArrayList<>();
+//    @OneToMany(
+//            mappedBy = "subCategory"
+//    )
+//    private List<ConstructionDrawing> constructionDrawings = new ArrayList<>();
 }

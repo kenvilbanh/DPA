@@ -1,6 +1,7 @@
 package com.fa.DPA.service;
 
 import com.fa.DPA.model.Account_Status;
+import com.fa.DPA.model.Order;
 import com.fa.DPA.model.Role;
 import com.fa.DPA.model.StaffAccount;
 import com.fa.DPA.repos.StaffAccountRepository;
@@ -67,25 +68,39 @@ public class StaffAccountService {
      * @param id
      * @param idRole
      */
-    public void modifyRoleOrStatus(Long id, Long idRole) {
-        StaffAccount staffAccount = this.findById(id);
-        if (staffAccount != null) {
-            System.out.println(staffAccount.toString());
-            if (idRole == null) {
-                if (staffAccount.getAccount_status().getAccount_status().equals("active")) {
-                    Account_Status account_status = new Account_Status();
-                    account_status.setId((long) 2);
-                    staffAccount.setAccount_status(account_status);
-                }
-            } else {
-                Role role = new Role();
-                role.setId(idRole);
-                staffAccount.setRole(role);
-
+    public void modifyRoleOrStatus(Long id, Long idRole) throws EntityNotFoundException{
+        StaffAccount staffAccount;
+        staffAccount = this.findById(id);
+        System.out.println(staffAccount.toString());
+        if (idRole == null) {
+            if (staffAccount.getAccount_status().getAccount_status().equals("active")) {
+                Account_Status account_status = new Account_Status();
+                account_status.setId((long) 2);
+                staffAccount.setAccount_status(account_status);
             }
-            staffAccountRepository.save(staffAccount);
-        }
+        } else {
+            Role role = new Role();
+            role.setId(idRole);
+            staffAccount.setRole(role);
 
+        }
+        staffAccountRepository.save(staffAccount);
+    }
+
+    /**
+     *
+     * @param id
+     * @return
+     */
+    public int checkExistByID(Long id){
+        StaffAccount staffAccount = new StaffAccount();
+        staffAccount.setId(id);
+        try{
+            return staffAccountRepository.existsStaffAccountById(staffAccount) == true ? 1 : 0;
+        }catch (Exception ex){
+            System.out.println(ex);
+        }
+        return -1;
     }
 
 

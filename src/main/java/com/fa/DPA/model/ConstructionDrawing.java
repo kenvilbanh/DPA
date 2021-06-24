@@ -32,11 +32,10 @@ public class ConstructionDrawing extends AbstractModel {
     private Discount discount;
 
 
-
-    @ManyToMany(
-            mappedBy = "constructionDrawings"
-    )
-    private List<Order> orders = new ArrayList<>();
+//    @ManyToMany(
+//            mappedBy = "constructionDrawings"
+//    )
+//    private List<Order> orders = new ArrayList<>();
 
 
     @ManyToOne

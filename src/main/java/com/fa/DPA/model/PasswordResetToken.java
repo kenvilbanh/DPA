@@ -3,25 +3,24 @@ package com.fa.DPA.model;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+import org.springframework.data.annotation.CreatedDate;
 
 import javax.persistence.*;
 import java.time.LocalDate;
+import java.time.LocalDateTime;
+import java.time.LocalTime;
 
+@Entity
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
-public class PasswordResetToken {
-    private static final int EXPIRATION = 60 * 24;
-
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id;
+public class PasswordResetToken extends AbstractModel{
 
     private String token;
 
     @OneToOne(targetEntity = CustomerAccount.class, fetch = FetchType.EAGER)
     @JoinColumn(nullable = false, name = "user_id")
-    private CustomerAccount usler;
+    private CustomerAccount user;
 
-    private LocalDate expiryDate;
+    private LocalDateTime expiryTime = LocalDateTime.now().plusMinutes(30);
 }
