@@ -1,6 +1,8 @@
 package com.fa.DPA.model;
 
+import lombok.AllArgsConstructor;
 import lombok.Data;
+import lombok.NoArgsConstructor;
 import org.springframework.data.annotation.CreatedDate;
 import org.springframework.data.jpa.domain.support.AuditingEntityListener;
 
@@ -12,6 +14,8 @@ import java.util.List;
 @Table(name = "orders")
 @EntityListeners({AuditingEntityListener.class})
 @Data
+@AllArgsConstructor
+@NoArgsConstructor
 public class Order extends AbstractModel {
 
 
@@ -24,6 +28,10 @@ public class Order extends AbstractModel {
     @ManyToOne
     @JoinColumn(name = "status_id")
     private Status status;
+
+    @ManyToOne
+    @JoinColumn(name = "owner_id")
+    private CustomerAccount owner;
 
     @ManyToOne
     @JoinColumn(name = "staff_id")

@@ -1,6 +1,7 @@
 package com.fa.DPA.service;
 
 import com.fa.DPA.model.Account_Status;
+import com.fa.DPA.model.Order;
 import com.fa.DPA.model.Role;
 import com.fa.DPA.model.StaffAccount;
 import com.fa.DPA.repos.StaffAccountRepository;
@@ -84,6 +85,22 @@ public class StaffAccountService {
 
         }
         staffAccountRepository.save(staffAccount);
+    }
+
+    /**
+     *
+     * @param id
+     * @return
+     */
+    public int checkExistByID(Long id){
+        StaffAccount staffAccount = new StaffAccount();
+        staffAccount.setId(id);
+        try{
+            return staffAccountRepository.existsStaffAccountById(staffAccount) == true ? 1 : 0;
+        }catch (Exception ex){
+            System.out.println(ex);
+        }
+        return -1;
     }
 
 

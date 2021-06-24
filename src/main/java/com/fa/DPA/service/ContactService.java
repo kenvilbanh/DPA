@@ -61,7 +61,7 @@ public class ContactService {
     public void softDelete(Long id) throws EntityNotFoundException {
         CustomerContact customerContact = this.findById(id);
         System.out.println(customerContact.toString());
-        if (customerContact.getStatus().getStatus().equals(Constant.ACTIVE)) {
+        if (!customerContact.getStatus().getStatus().equals(Constant.CANCEL)) {
             Status status = new Status();
             status.setId((long) 2);
             customerContact.setStatus(status);
