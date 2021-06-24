@@ -2,10 +2,7 @@ package com.fa.DPA.controller;
 
 import com.fa.DPA.constant.Constant;
 import com.fa.DPA.dto.OrderDTO;
-import com.fa.DPA.model.CustomerAccount;
-import com.fa.DPA.model.CustomerContact;
-import com.fa.DPA.model.Order;
-import com.fa.DPA.model.Status;
+import com.fa.DPA.model.*;
 import com.fa.DPA.service.OrderService;
 import com.fa.DPA.service.StaffAccountService;
 import org.apache.tomcat.util.bcel.Const;
@@ -21,6 +18,7 @@ import org.springframework.web.bind.annotation.*;
 import javax.persistence.EntityNotFoundException;
 import java.net.URI;
 import java.net.URISyntaxException;
+import java.sql.Date;
 import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -202,6 +200,7 @@ public class OrderController {
                                                @RequestParam("id_staff") Long idStaff) {
 
         if (orderService.checkExistByID(idOrder) == 1 && staffAccountService.checkExistByID(idStaff) == 1) {
+            Order order = orderService.findOrderById(idOrder);
             int countProcess = orderService.countOrderProcessingWithStaff(idStaff);
             System.out.println("Number of count processing: " + countProcess);
             if (countProcess == -1) {
@@ -212,7 +211,29 @@ public class OrderController {
                 }
 
                 LocalDate confirmDate = LocalDate.now();
+                order.setConfirmedDate(Date.valueOf(confirmDate));
+                StaffAccount staffAccount = new StaffAccount();
+                staffAccount.setId(idStaff);
+                Status status = new Status();
+                status.setId(Constant.ID_PROCESS);
+                order.setStatus(status);
 
+                try{
+                    orderService.save(order);
+                }catch (Exception ex){
+                    System.out.println(ex);
+                    return new ResponseEntity<>(null, HttpStatus.INTERNAL_SERVER_ERROR);
+                }
+
+
+
+                try {
+                    httpHeaders.setLocation(new URI("/order"));
+                } catch (URISyntaxException e) {
+                    e.printStackTrace();
+                    return new ResponseEntity<>(null, HttpStatus.BAD_REQUEST);
+                }
+                return new ResponseEntity<>(httpHeaders, HttpStatus.OK);
             }
         }
 
