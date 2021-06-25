@@ -28,13 +28,14 @@ public class News extends AbstractModel{
     @CreatedDate
     private Date createdDate;
 
+    @Column
+    private String imgSource;
+
     @ManyToOne
     @JoinColumn(name = "create_by", nullable = false)
     private StaffAccount staffAccount;
 
-    @Column(name = "end_date")
-    private Date endDate;
+    @Column(name="is_Enable")
+    private Boolean isEnable;
 
-    @Column(name = "is_Modify" )
-    private Boolean isModify;
 }

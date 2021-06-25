@@ -16,6 +16,7 @@ import java.util.List;
 import java.util.Map;
 import java.util.Optional;
 
+
 @RestController
 @RequestMapping("/news")
 public class NewsController {
@@ -27,7 +28,8 @@ public class NewsController {
     }
 
     @GetMapping
-    public ResponseEntity<Map<String,Object>> getNewsPage(@RequestParam(defaultValue = Constant.DEFAULT_NUM_PAGE)int page){
+    public ResponseEntity<Map<String,Object>> getNewsPage(@RequestParam(defaultValue = Constant.DEFAULT_NUM_PAGE)int page
+    ){
         Map<String, Object> response = new HashMap<>();
         List<News> newsList;
         Pageable pageable = PageRequest.of(page,Constant.DEFAULT_PAGE_SIZE);
@@ -72,23 +74,12 @@ public class NewsController {
             News _news= newsData.get();
             _news.setTitle(news.getTitle());
             _news.setContent(news.getContent());
-            _news.setCreatedDate(news.getCreatedDate());
             _news.setDescription(news.getDescription());
-            _news.setEndDate(news.getEndDate());
-            _news.setIsModify(news.getIsModify());
+            _news.setIsEnable(news.getIsEnable());
             return new ResponseEntity<>(newsService.saveNews(_news),HttpStatus.OK);
         }else{
             return new ResponseEntity<>(HttpStatus.NOT_FOUND);
         }
     }
 
-//    @DeleteMapping("/{id}")
-//    public ResponseEntity<News> deleteNews(@PathVariable("id") long id){
-//        try {
-//            newsService.deleteNews(id);
-//            return new ResponseEntity<>(HttpStatus.NO_CONTENT);
-//        }catch (Exception ex){
-//            return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
-//        }
-//    }
 }

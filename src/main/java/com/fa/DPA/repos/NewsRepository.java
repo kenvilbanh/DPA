@@ -1,6 +1,5 @@
 package com.fa.DPA.repos;
 
-import com.fa.DPA.model.CustomerContact;
 import com.fa.DPA.model.News;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
@@ -23,5 +22,4 @@ public interface NewsRepository extends BaseRepository<News>{
     @Override
     News save(News news);
 
-    void deleteById(Long id);
 }

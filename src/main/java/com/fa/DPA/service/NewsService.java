@@ -48,11 +48,4 @@ public class NewsService {
         }
         return null;
     }
-    public void deleteNews(Long id){
-        try {
-            newsRepository.deleteById(id);
-        }catch (Exception ex){
-            System.out.println(ex);
-        }
-    }
 }
