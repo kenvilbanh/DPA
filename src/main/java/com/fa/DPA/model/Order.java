@@ -19,7 +19,9 @@ import java.util.List;
 public class Order extends AbstractModel {
 
 
-    //private CustomerAccount owner;
+    @ManyToOne
+    @JoinColumn(name ="customer_id")
+    private CustomerAccount customerAccount;
 
     @ManyToMany
     @JoinTable(name ="cd_order", joinColumns = @JoinColumn(name = "order_id"), inverseJoinColumns = @JoinColumn(name = "cd_id"))
@@ -43,9 +45,7 @@ public class Order extends AbstractModel {
     @Column
     private String note;
 
-//    @ManyToOne
-//    @JoinColumn(name ="status_id")
-//    private Status status;
+
 
     @Column
     @CreatedDate

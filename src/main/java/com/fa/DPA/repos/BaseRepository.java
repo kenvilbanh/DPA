@@ -69,4 +69,5 @@ public interface BaseRepository<T extends AbstractModel> extends JpaRepository<T
     long count();
 
 
+
 }
