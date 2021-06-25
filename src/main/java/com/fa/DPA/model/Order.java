@@ -59,4 +59,10 @@ public class Order extends AbstractModel {
 
     @Column
     private String totalPrice;
+
+    @Column(length = 30)
+    private String phoneReceive;
+
+    @Column(length = 50)
+    private String addressReceive;
 }

@@ -26,7 +26,7 @@ public class CustomerAccount extends BaseAccount{
     @Column(unique = true, length = 50)
     private String email;
 
-    @Column(unique = true, length = 50)
+    @Column(length = 30)
     private String phone;
 
     @Column(length = 50)

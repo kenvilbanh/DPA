@@ -184,6 +184,7 @@ public class OrderController {
      * @return
      */
     @GetMapping("/all-wait-confirm")
+    @ExceptionHandler({Exception.class})
     public ResponseEntity<Map<String, Object>> getAlWaitConfirmOrder(
             @RequestParam(defaultValue = Constant.DEFAULT_NUM_PAGE) int page) {
         return process(page, 3);
@@ -226,9 +227,8 @@ public class OrderController {
                 }
 
 
-
                 try {
-                    httpHeaders.setLocation(new URI("/order"));
+                    httpHeaders.setLocation(new URI("/order/all-wait-confirm"));
                 } catch (URISyntaxException e) {
                     e.printStackTrace();
                     return new ResponseEntity<>(null, HttpStatus.BAD_REQUEST);
@@ -238,6 +238,22 @@ public class OrderController {
         }
 
         return new ResponseEntity<>(null, HttpStatus.NOT_FOUND);
+    }
+
+    @PostMapping("/transfer")
+    public ResponseEntity<Object> getTransferPage(@RequestParam("idOrder") Long id){
+        Order order;
+        try{
+            order = orderService.findOrderById(id);
+        }catch (EntityNotFoundException ex){
+            return new ResponseEntity<>(null, HttpStatus.NOT_FOUND);
+        }
+        Status status = new Status();
+        status.setId(Constant.ID_PENDING);
+        order.setStatus(status);
+        order.setStaffAccount(null);
+        order.setConfirmedDate(null);
+        return new ResponseEntity<>(null, HttpStatus.OK);
     }
 
 
