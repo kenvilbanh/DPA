@@ -37,13 +37,13 @@ public class DiscountService {
 
     public Discount saveDiscount(Discount discount) {
         try {
-            Discount discountReturn = new Discount();
+            Discount discountReturn;
             if (discount.getId() != null) {
                 Discount oldDiscount = discountRepository.findById(discount.getId()).orElse(new Discount());
                 oldDiscount.setName(discount.getName());
                 oldDiscount.setAmount(discount.getAmount());
                 oldDiscount.setDescription(discount.getDescription());
-                oldDiscount.setConstructionDrawing(discount.getConstructionDrawing());
+//                oldDiscount.setConstructionDrawing(discount.getConstructionDrawing());
                 discountReturn = oldDiscount;
             } else {
                 discountReturn = discount;

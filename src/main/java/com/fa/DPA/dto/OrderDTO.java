@@ -13,8 +13,7 @@ import java.util.List;
 import java.util.Map;
 
 @Data
-public class OrderDTO {
-    private Long id;
+public class OrderDTO extends AbstractDTO{
     private String orderCode;
     private Map<Long, String> productName = new HashMap<>();
     private String totalPrice;

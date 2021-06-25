@@ -197,8 +197,8 @@ public class OrderController {
      */
     @PostMapping("/confirm")
     @ExceptionHandler({Exception.class})
-    public ResponseEntity<Object> confirmOrder(@RequestParam("id") Long idOrder,
-                                               @RequestParam("id_staff") Long idStaff) {
+    public ResponseEntity<Object> confirmOrder(@RequestParam("idOrder") Long idOrder,
+                                               @RequestParam("idStaff") Long idStaff) {
 
         if (orderService.checkExistByID(idOrder) == 1 && staffAccountService.checkExistByID(idStaff) == 1) {
             Order order = orderService.findOrderById(idOrder);
@@ -215,6 +215,7 @@ public class OrderController {
                 order.setConfirmedDate(Date.valueOf(confirmDate));
                 StaffAccount staffAccount = new StaffAccount();
                 staffAccount.setId(idStaff);
+                order.setStaffAccount(staffAccount);
                 Status status = new Status();
                 status.setId(Constant.ID_PROCESS);
                 order.setStatus(status);
@@ -241,10 +242,14 @@ public class OrderController {
     }
 
     @PostMapping("/transfer")
-    public ResponseEntity<Object> getTransferPage(@RequestParam("idOrder") Long id){
+    public ResponseEntity<Object> getTransferPage(@RequestParam("idStaff") Long idStaff
+            ,@RequestParam("idOrder") Long id){
         Order order;
         try{
             order = orderService.findOrderById(id);
+            if(order.getStaffAccount().getId() != idStaff){
+                return new ResponseEntity<>(null, HttpStatus.NOT_ACCEPTABLE);
+            }
         }catch (EntityNotFoundException ex){
             return new ResponseEntity<>(null, HttpStatus.NOT_FOUND);
         }
@@ -253,7 +258,10 @@ public class OrderController {
         order.setStatus(status);
         order.setStaffAccount(null);
         order.setConfirmedDate(null);
-
+        Order returnOrder = orderService.save(order);
+        if(returnOrder == null){
+            return new ResponseEntity<>(null, HttpStatus.INTERNAL_SERVER_ERROR);
+        }
         return new ResponseEntity<>(null, HttpStatus.OK);
     }
 

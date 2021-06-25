@@ -10,7 +10,7 @@ import java.util.Date;
 import java.util.List;
 
 @Data
-public class InteriorDesignDTO extends AbstractDTO<InteriorDesignDTO> {
+public class InteriorDesignDTO extends AbstractDTO {
 
     private String title;
 

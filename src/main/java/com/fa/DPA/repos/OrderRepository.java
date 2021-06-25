@@ -42,10 +42,10 @@ public interface OrderRepository extends BaseRepository<Order> {
 
     /**
      *
-     * @param order
+     * @param id
      * @return
      */
-    boolean existsOrderById(Order order);
+    boolean existsOrderById(Long id);
 
     /**
      *

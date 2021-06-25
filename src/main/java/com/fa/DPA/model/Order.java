@@ -46,7 +46,6 @@ public class Order extends AbstractModel {
     private String note;
 
 
-
     @Column
     @CreatedDate
     private Date createdDate;

@@ -28,12 +28,6 @@ public class Discount extends AbstractModel {
     @Column(name = "create_by")
     private String createBy;
 
-
-
-    @OneToOne(mappedBy = "discount")
-    private ConstructionDrawing constructionDrawing;
-
-
 //    @OneToOne(mappedBy = "discount")
 //    private ConstructionDrawing constructionDrawing;
 

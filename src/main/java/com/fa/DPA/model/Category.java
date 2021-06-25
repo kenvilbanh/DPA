@@ -18,6 +18,8 @@ public class Category extends AbstractModel {
     @JoinColumn(name = "type_id", nullable = false)
     private Type type;
 
+    private boolean status;
+
 //    @OneToMany(mappedBy = "category")
 //    private List<SubCategory> subcategories = new ArrayList<>();
 }

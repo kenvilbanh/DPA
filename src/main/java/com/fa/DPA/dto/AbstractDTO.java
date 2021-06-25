@@ -8,12 +8,7 @@ import java.util.List;
 
 
 @Data
-public class AbstractDTO<T> {
-    private Long id;
-
-
-
-
-
+public class AbstractDTO{
+    protected Long id;
 
 }

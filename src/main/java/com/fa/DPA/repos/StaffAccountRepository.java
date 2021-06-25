@@ -30,8 +30,8 @@ public interface StaffAccountRepository extends BaseRepository<StaffAccount>{
 
     /**
      *
-     * @param s
+     * @param id
      * @return
      */
-    boolean existsStaffAccountById(StaffAccount s);
+    boolean existsStaffAccountById(Long id);
 }
