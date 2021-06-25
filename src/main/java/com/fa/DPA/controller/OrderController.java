@@ -253,6 +253,7 @@ public class OrderController {
         order.setStatus(status);
         order.setStaffAccount(null);
         order.setConfirmedDate(null);
+
         return new ResponseEntity<>(null, HttpStatus.OK);
     }
 
