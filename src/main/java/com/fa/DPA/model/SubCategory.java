@@ -19,6 +19,8 @@ public class SubCategory extends AbstractModel {
     @JoinColumn(name = "category_id", nullable = false)
     private Category category;
 
+    private boolean status;
+
 //    @ManyToMany(mappedBy = "subCategories")
 //    private List<InteriorDesign> interiorDesigns = new ArrayList<>();
 

@@ -2,10 +2,7 @@ package com.fa.DPA.controller;
 
 import com.fa.DPA.constant.Constant;
 import com.fa.DPA.dto.OrderDTO;
-import com.fa.DPA.model.CustomerAccount;
-import com.fa.DPA.model.CustomerContact;
-import com.fa.DPA.model.Order;
-import com.fa.DPA.model.Status;
+import com.fa.DPA.model.*;
 import com.fa.DPA.service.OrderService;
 import com.fa.DPA.service.StaffAccountService;
 import org.apache.tomcat.util.bcel.Const;
@@ -21,6 +18,7 @@ import org.springframework.web.bind.annotation.*;
 import javax.persistence.EntityNotFoundException;
 import java.net.URI;
 import java.net.URISyntaxException;
+import java.sql.Date;
 import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -186,6 +184,7 @@ public class OrderController {
      * @return
      */
     @GetMapping("/all-wait-confirm")
+    @ExceptionHandler({Exception.class})
     public ResponseEntity<Map<String, Object>> getAlWaitConfirmOrder(
             @RequestParam(defaultValue = Constant.DEFAULT_NUM_PAGE) int page) {
         return process(page, 3);
@@ -198,10 +197,11 @@ public class OrderController {
      */
     @PostMapping("/confirm")
     @ExceptionHandler({Exception.class})
-    public ResponseEntity<Object> confirmOrder(@RequestParam("id") Long idOrder,
-                                               @RequestParam("id_staff") Long idStaff) {
+    public ResponseEntity<Object> confirmOrder(@RequestParam("idOrder") Long idOrder,
+                                               @RequestParam("idStaff") Long idStaff) {
 
         if (orderService.checkExistByID(idOrder) == 1 && staffAccountService.checkExistByID(idStaff) == 1) {
+            Order order = orderService.findOrderById(idOrder);
             int countProcess = orderService.countOrderProcessingWithStaff(idStaff);
             System.out.println("Number of count processing: " + countProcess);
             if (countProcess == -1) {
@@ -212,11 +212,57 @@ public class OrderController {
                 }
 
                 LocalDate confirmDate = LocalDate.now();
+                order.setConfirmedDate(Date.valueOf(confirmDate));
+                StaffAccount staffAccount = new StaffAccount();
+                staffAccount.setId(idStaff);
+                order.setStaffAccount(staffAccount);
+                Status status = new Status();
+                status.setId(Constant.ID_PROCESS);
+                order.setStatus(status);
 
+                try{
+                    orderService.save(order);
+                }catch (Exception ex){
+                    System.out.println(ex);
+                    return new ResponseEntity<>(null, HttpStatus.INTERNAL_SERVER_ERROR);
+                }
+
+
+                try {
+                    httpHeaders.setLocation(new URI("/order/all-wait-confirm"));
+                } catch (URISyntaxException e) {
+                    e.printStackTrace();
+                    return new ResponseEntity<>(null, HttpStatus.BAD_REQUEST);
+                }
+                return new ResponseEntity<>(httpHeaders, HttpStatus.OK);
             }
         }
 
         return new ResponseEntity<>(null, HttpStatus.NOT_FOUND);
+    }
+
+    @PostMapping("/transfer")
+    public ResponseEntity<Object> getTransferPage(@RequestParam("idStaff") Long idStaff
+            ,@RequestParam("idOrder") Long id){
+        Order order;
+        try{
+            order = orderService.findOrderById(id);
+            if(order.getStaffAccount().getId() != idStaff){
+                return new ResponseEntity<>(null, HttpStatus.NOT_ACCEPTABLE);
+            }
+        }catch (EntityNotFoundException ex){
+            return new ResponseEntity<>(null, HttpStatus.NOT_FOUND);
+        }
+        Status status = new Status();
+        status.setId(Constant.ID_PENDING);
+        order.setStatus(status);
+        order.setStaffAccount(null);
+        order.setConfirmedDate(null);
+        Order returnOrder = orderService.save(order);
+        if(returnOrder == null){
+            return new ResponseEntity<>(null, HttpStatus.INTERNAL_SERVER_ERROR);
+        }
+        return new ResponseEntity<>(null, HttpStatus.OK);
     }
 
 

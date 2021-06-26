@@ -93,10 +93,8 @@ public class StaffAccountService {
      * @return
      */
     public int checkExistByID(Long id){
-        StaffAccount staffAccount = new StaffAccount();
-        staffAccount.setId(id);
         try{
-            return staffAccountRepository.existsStaffAccountById(staffAccount) == true ? 1 : 0;
+            return staffAccountRepository.existsStaffAccountById(id) == true ? 1 : 0;
         }catch (Exception ex){
             System.out.println(ex);
         }

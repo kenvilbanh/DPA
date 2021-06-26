@@ -13,8 +13,7 @@ import java.util.List;
 import java.util.Map;
 
 @Data
-public class OrderDTO {
-    private Long id;
+public class OrderDTO extends AbstractDTO{
     private String orderCode;
     private Map<Long, String> productName = new HashMap<>();
     private String totalPrice;
@@ -22,6 +21,8 @@ public class OrderDTO {
     private Date createDate;
     private Date finishedDate;
     private Long ownerId;
+    private String addressReceive;
+    private String phoneReceive;
     private long status;
 
     public OrderDTO(Order order) {
@@ -36,5 +37,7 @@ public class OrderDTO {
         this.finishedDate = order.getFinishedDate();
         this.status = order.getStatus().getId();
         this.ownerId = order.getOwner().getId();
+        this.addressReceive = order.getAddressReceive() == null ? order.getOwner().getAddress() : order.getAddressReceive();
+        this.phoneReceive = order.getPhoneReceive() == null ? order.getOwner().getPhone() : order.getPhoneReceive();
     }
 }

@@ -150,10 +150,9 @@ public class OrderService {
      * @return
      */
     public int checkExistByID(Long id){
-        Order order = new Order();
-        order.setId(id);
+
         try{
-            return orderRepository.existsOrderById(order) == true ? 1 : 0;
+            return orderRepository.existsOrderById(id) == true ? 1 : 0;
         }catch (Exception ex){
             System.out.println(ex);
         }
